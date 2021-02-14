@@ -1,7 +1,7 @@
 import { html, render } from "lit-html";
 
-import { listTemplate } from "./list.js";
-import { inputTemplate } from "./input.js";
+import { listTemplate } from "./todo_list/list.js";
+import { inputTemplate } from "./todo_list/input.js";
 
 export const myTemplate = () => {
   return html`
