@@ -33,7 +33,7 @@ export const listTemplate = (initItems, loadRecords, onChange, sort) => {
   return html`
     ${sortTemplate}
     <button style="margin: 5px" @click=${load}>Load More</button>
-    <div style="background: black; padding-left: 5px; padding-top: 5px;">
+    <div style="background: black; padding: 5px;">
       ${repeat(items, item => item.id, item => recordTemplate(item, onChange))}
     </div>
   `;
