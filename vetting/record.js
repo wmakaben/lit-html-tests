@@ -1,25 +1,26 @@
 import { html } from "lit-html";
 import { styleMap } from "lit-html/directives/style-map.js";
 
-export const recordTemplate = item => {
-  // TODO: style depending on `edited`
-  const styles = {};
+export const recordTemplate = (item, onChange) => {
+  const styles = {
+    display: "flex",
+    "align-items": "center",
+    padding: "5px",
+    margin: "5px",
+    background: item.edited ? "black" : "white",
+    color: item.edited ? "white" : "black"
+  };
+
+  const updateLabel = e => {
+    onChange(item.id, e.srcElement.value);
+  };
 
   return html`
-    <div style = "${styleMap(styles)}">
-      <img src=${item.img}></img>
-      <span>${item.label}</span>
+    <div style="${styleMap(styles)}">
+      <img src=${
+        item.img
+      } style="margin-right: 5px; width: 100px; height 100px;"></img>
+      <input .value=${item.label} @change=${updateLabel}></input>
     </div>
   `;
 };
-
-// export const listItemTemplate = item => {
-//   const styles = {
-//     color: item.isDone ? "#808080" : "black",
-//     "text-decoration": item.isDone ? "line-through" : "none",
-//     "font-weight": item.recent ? 600 : 200
-//   };
-//   return html`
-//     <li style="${styleMap(styles)}">${item.text}</li>
-//   `;
-// };

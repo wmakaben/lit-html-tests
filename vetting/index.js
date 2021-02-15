@@ -1,14 +1,7 @@
-import { html, render } from "lit-html";
+import { render } from "lit-html";
 
 import { DataService } from "./data.js";
 import { listTemplate } from "./list.js";
-
-export const todoListTemplate = () => {
-  return html`
-    <div id="formContainer"></div>
-    <div id="listContainer"></div>
-  `;
-};
 
 export const renderTemplate = () => {
   const dataService = new DataService();
@@ -25,8 +18,8 @@ export const renderTemplate = () => {
     renderList();
   };
 
-  const onRecordChanged = (idx, label) => {
-    dataService.updateRecord(idx, label);
+  const onRecordChanged = (id, label) => {
+    dataService.updateRecord(id, label);
     renderList();
   };
 

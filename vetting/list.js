@@ -13,9 +13,11 @@ export const listTemplate = (initItems, loadRecords, onChange) => {
   };
 
   return html`
-    <div>
-      ${items.map(recordTemplate)}
+    <div style="background: black; padding-left: 5px; padding-top: 5px;">
+      <div>
+        ${items.map(item => recordTemplate(item, onChange))}
+      </div>
+      <button style="margin: 5px" @click=${load}>Load More</button>
     </div>
-    <button @click=${load}>Load More</button>
   `;
 };
