@@ -15,12 +15,12 @@ export const renderTemplate = () => {
 
   function renderList() {
     render(
-      listTemplate(dataService.records, onLoad, onRecordChanged),
+      listTemplate(dataService.records, loadRecords, onRecordChanged),
       document.body
     );
   }
 
-  const onLoad = () => {
+  const loadRecords = () => {
     dataService.loadRecords();
     renderList();
   };
