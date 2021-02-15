@@ -20,9 +20,9 @@ export class DataService {
     }
   };
 
-  updateRecord = (id, label) => {
+  updateRecord = (id, label, edited) => {
     const record = this.records.find(r => r.id === id);
     record.label = label;
-    record.edited = true;
+    record.edited = edited;
   };
 }

@@ -18,8 +18,8 @@ export const renderTemplate = () => {
     renderList();
   };
 
-  const onRecordChanged = (id, label) => {
-    dataService.updateRecord(id, label);
+  const onRecordChanged = (id, label, edited) => {
+    dataService.updateRecord(id, label, edited);
     renderList();
   };
 
