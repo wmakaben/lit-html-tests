@@ -24,7 +24,14 @@ export class DataService {
 
   sortRecords = field => {
     this.sortField = field;
-    this.records.sort((a, b) => (a[field] > b[field] ? 1 : -1));
+    this.records.sort((a, b) => {
+      if (a[field] < b[field]) {
+        return -1;
+      } else if (a[field] > b[field]) {
+        return 1;
+      }
+      return 0;
+    });
   };
 
   updateRecord = (id, label, edited) => {
