@@ -3,14 +3,14 @@ export class DataService {
   records = [];
 
   constructor() {
-    // this.loadRecords();
+    this.loadRecords();
   }
 
   getRecords = () => this.records;
 
   loadRecords = (count = 5) => {
     const max = this.pxCount + count;
-    for (this.pxCount < max; this.pxCount++; ) {
+    for (this.pxCount; this.pxCount <= max; this.pxCount++) {
       this.records.push({
         id: this.pxCount,
         label: this.pxCount % 2 == 0 ? "cat" : "not cat",
