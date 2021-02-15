@@ -1,7 +1,9 @@
 import { html } from "lit-html";
+import { repeat } from "lit-html/directives/repeat.js";
+
 import { recordTemplate } from "./record.js";
 
-export const listTemplate = (initItems, loadRecords, onChange, onSort) => {
+export const listTemplate = (initItems, loadRecords, onChange, sort) => {
   const items = initItems || [];
 
   const load = {
@@ -12,39 +14,27 @@ export const listTemplate = (initItems, loadRecords, onChange, onSort) => {
     capture: true
   };
 
-  // TODO: implement sort
-  const idSort = {
-    handleEvent(e) {
-      // onSort('id')
-    },
-    capture: true
+  const updateSort = e => {
+    sort.onChange(e.target.value);
   };
 
-  // TODO: implement sort
-  const labelSort = {
-    handleEvent(e) {
-      // onSort('label')
-    },
-    capture: true
-  };
-
-  // TODO: implement sort
-  const statusSort = {
-    handleEvent(e) {
-      // onSort('status')
-    },
-    capture: true
-  };
+  const sortTemplate = sort.options.map(
+    option => html`
+      <input
+        type="radio"
+        value="${option}"
+        .checked=${option === sort.field}
+        @change=${updateSort}
+      />
+      <span>${option}</span>
+    `
+  );
 
   return html`
-    <button style="margin: 5px" @click=${idSort}>Sort by id</button>
-    <button style="margin: 5px" @click=${labelSort}>Sort by label</button>
-    <button style="margin: 5px" @click=${statusSort}>Sort by status</button>
+    ${sortTemplate}
+    <button style="margin: 5px" @click=${load}>Load More</button>
     <div style="background: black; padding-left: 5px; padding-top: 5px;">
-      <div>
-        ${items.map(item => recordTemplate(item, onChange))}
-      </div>
-      <button style="margin: 5px" @click=${load}>Load More</button>
+      ${repeat(items, item => item.id, item => recordTemplate(item, onChange))}
     </div>
   `;
 };

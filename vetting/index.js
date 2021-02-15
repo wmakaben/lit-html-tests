@@ -6,9 +6,20 @@ import { listTemplate } from "./list.js";
 export const renderTemplate = () => {
   const dataService = new DataService();
 
+  const sortConfig = {
+    onChange: onSortChange,
+    options: ["id", "label", "edited"],
+    field: "id"
+  };
+
   function renderList() {
     render(
-      listTemplate(dataService.records, loadRecords, onRecordChanged),
+      listTemplate(
+        dataService.records,
+        loadRecords,
+        onRecordChanged,
+        sortConfig
+      ),
       document.body
     );
   }
@@ -22,6 +33,12 @@ export const renderTemplate = () => {
     dataService.updateRecord(id, label, edited);
     renderList();
   };
+
+  function onSortChange(field) {
+    sortConfig.field = field;
+    dataService.sortRecords(field);
+    renderList();
+  }
 
   renderList();
 };

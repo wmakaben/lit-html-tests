@@ -1,6 +1,7 @@
 export class DataService {
   pxCount = 100;
   records = [];
+  sortField = "id";
 
   constructor() {
     this.loadRecords();
@@ -18,11 +19,18 @@ export class DataService {
         edited: false
       });
     }
+    this.sortRecords(this.sortField);
+  };
+
+  sortRecords = field => {
+    this.sortField = field;
+    this.records.sort((a, b) => (a[field] > b[field] ? 1 : -1));
   };
 
   updateRecord = (id, label, edited) => {
     const record = this.records.find(r => r.id === id);
     record.label = label;
     record.edited = edited;
+    this.sortRecords(this.sortField);
   };
 }
